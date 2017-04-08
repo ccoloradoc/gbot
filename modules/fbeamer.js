@@ -57,15 +57,93 @@ class FBeamer {
             timeOfMessage: msgEvent.timestamp,
             message: msgEvent.message
           };
-
           if(msgEvent.message.attachments != undefined) {
             console.log(JSON.stringify(msgEvent.message.attachments));
           }
-
           callback(msgObject);
         });
       });
     }
+  }
+
+  sendMessage(payload) {
+    return new Promise((resolve, reject) => {
+      request({
+        uri: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {
+          access_token: this.ACCESS_TOKEN
+        },
+        method: 'POST',
+        json: payload
+      }, (error, response, body) => {
+        if(!error && response.statusCode === 200) {
+          resolve({
+            messageId: body.message_id
+          });
+        } else {
+          reject(response.body.error.message);
+        }
+      });
+    });
+  }
+
+  txt(id, text) {
+    let payload = {
+      recipient: {
+        id: id
+      },
+      message: {
+        text: text
+      }
+    }
+
+    this.sendMessage(payload)
+      .catch(error => console.log(error));
+  }
+
+  img(id, url) {
+    let payload = {
+      recipient: {
+        id: id
+      },
+      message:{
+        attachment: {
+          type:"image",
+          payload:{
+            url: url
+          }
+        }
+      }
+    }
+
+    this.sendMessage(payload)
+      .catch(error => console.log(error));
+  }
+
+  download(id, text, url) {
+    let payload = {
+      recipient: {
+        id: id
+      },
+      message:{
+        attachment:{
+          type:'template',
+          payload:{
+            template_type:'button',
+            text: text,
+            buttons:[{
+                type: 'web_url',
+                url:url,
+                title:'Download',
+                webview_height_ratio: 'compact'
+            }]
+          }
+        }
+      }
+    }
+
+    this.sendMessage(payload)
+      .catch(error => console.log(error));
   }
 }
 

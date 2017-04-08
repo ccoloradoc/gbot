@@ -12,6 +12,8 @@ var samples = [
 ];
 
 samples.forEach(function(uri) {
+  uri = parser.clean(uri);
+  console.log(uri);
   parser.extract(uri, function(gif) {
     console.log('> ' + gif);
   });
