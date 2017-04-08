@@ -1,0 +1,28 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "database_development",
+    "dialect": "sqlite",
+    "storage": "gbot.dev.sqlite"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "qa",
+    "dialect": "sqlite"
+  },
+  "production": {
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "port": 3306,
+    "define": {
+        "paranoid": true
+    },
+    "logging": false
+  }
+}
