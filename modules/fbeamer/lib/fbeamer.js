@@ -57,10 +57,10 @@ class FBeamer {
             timeOfMessage: msgEvent.timestamp,
             message: msgEvent.message
           };
-          if(msgEvent.message.attachments != undefined) {
-            console.log(">>Attachments")
-            console.log("   " + JSON.stringify(msgEvent.message.attachments));
-          }
+          // if(msgEvent.message.attachments != undefined) {
+          //   console.log(">>Attachments")
+          //   console.log("   " + JSON.stringify(msgEvent.message.attachments));
+          // }
           callback(msgObject);
         });
       });

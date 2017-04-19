@@ -23,28 +23,35 @@ module.exports = {
         if (!error && response.statusCode == 200) {
           var $ = cheerio.load(body);
 
-          $('img').filter(function() {
-              var uri = '';
-
-              if($(this).attr('data-gif') != undefined) {
-                uri = $(this).attr('data-gif');
-              } else {
-                uri = $(this).attr('src');
-              }
-
-              if(uri.includes('http://www.phygee.com/') && !uri.includes('files/profile/')) {
-                uri = '';
-              }
-
-              if(uri != undefined && uri.startsWith('http') && uri.endsWith('.gif')) {
-                callback(uri);
+          $('meta').filter(function() {
+              if($(this).attr('property') == 'og:url' && $(this).attr('content').endsWith('.gif')) {
+                //console.log('Meta: ' + $(this).attr('content'));
+                callback($(this).attr('content'));
               }
           });
 
-          $('.fullgiflogo').filter(function() {
-            var uri = $(this).attr('onclick').replace('fullface(\'','').replace('\')','');
-            callback(uri);
-          });
+          // $('img').filter(function() {
+          //     var uri = '';
+          //
+          //     if($(this).attr('data-gif') != undefined) {
+          //       uri = $(this).attr('data-gif');
+          //     } else {
+          //       uri = $(this).attr('src');
+          //     }
+          //
+          //     if(uri.includes('http://www.phygee.com/') && !uri.includes('files/profile/')) {
+          //       uri = '';
+          //     }
+          //
+          //     if(uri != undefined && uri.startsWith('http') && uri.endsWith('.gif')) {
+          //       callback(uri);
+          //     }
+          // });
+          //
+          // $('.fullgiflogo').filter(function() {
+          //   var uri = $(this).attr('onclick').replace('fullface(\'','').replace('\')','');
+          //   callback(uri);
+          // });
 
         } else {
           callback(null);
