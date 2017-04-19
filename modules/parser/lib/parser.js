@@ -7,6 +7,11 @@ module.exports = {
     return target.substring(0, target.indexOf('&'));
   },
   extract: function(url, callback) {
+
+    // It is already a GIF
+    if(url.endsWith('.gif'))
+      callback(url);
+
     //console.log(url);
     var options =  {
         encoding: null,
@@ -20,18 +25,6 @@ module.exports = {
 
           $('img').filter(function() {
               var uri = '';
-
-              // if(options.url.includes('wallgif.com') || options.url.includes('giphy.com/go')) {
-              //   console.log($(this))
-              //   uri = $(this).attr('data-gif');
-              // } else if(options.url.includes('gifsnation.com')) {
-              //   uri = $(this).attr('src');
-              // } else {
-              //   uri = $(this).attr('src');
-              //   if(uri.includes('http://www.phygee.com/') && !uri.includes('files/profile/')) {
-              //     uri = '';
-              //   }
-              // }
 
               if($(this).attr('data-gif') != undefined) {
                 uri = $(this).attr('data-gif');

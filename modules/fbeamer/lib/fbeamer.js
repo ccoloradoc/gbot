@@ -58,7 +58,8 @@ class FBeamer {
             message: msgEvent.message
           };
           if(msgEvent.message.attachments != undefined) {
-            console.log(JSON.stringify(msgEvent.message.attachments));
+            console.log(">>Attachments")
+            console.log("   " + JSON.stringify(msgEvent.message.attachments));
           }
           callback(msgObject);
         });
