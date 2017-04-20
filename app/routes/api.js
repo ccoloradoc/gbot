@@ -37,27 +37,14 @@ router.post('/', (req, res, next) => {
           console.log(' >> Sent : ' + payload.source);
           f.txt(payload.sender, 'That is a funny gif, let me find the url for you...');
         });
-
-        // var url = parser.clean(msg.message.attachments[0].url);
-        // console.log(url);
-        // parser.extract(url, function(gif) {
-        //   console.log('> ' + gif);
-        //   var resource = new Resource({
-        //     source: url,
-        //     resource: gif,
-        //     parsed: true
-        //   });
-        //
-        //   dbservice.save(resource);
-        //   //f.img(msg.sender, gif);
-        //   //f.txt(msg.sender, `That is a funny gif, here you have the direct link ${gif}`);
-        //   f.download(msg.sender, 'That is a funny gif, you can download it here!', gif)
-        // });
     }
   });
   res.status(200).end();
 });
 
+/*
+ * Monitor GIF parse resolve
+*/
 mqservice.exchange('gif_feed', function(payload) {
   console.log(' <<' + payload.resource);
   f.download(payload.sender, 'I got it! You can download the GIF here:', payload.resource);
