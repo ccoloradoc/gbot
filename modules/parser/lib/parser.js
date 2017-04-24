@@ -25,8 +25,10 @@ module.exports = {
 
           $('meta').filter(function() {
               if($(this).attr('property') == 'og:url' && $(this).attr('content').endsWith('.gif')) {
-                //console.log('Meta: ' + $(this).attr('content'));
-                callback($(this).attr('content'));
+                var resource = $(this).attr('content');
+                if(resource.includes('wallgif.com'))
+                    resource = resource.replace('cdn.','media.');
+                callback(resource);
               }
           });
 
