@@ -146,6 +146,25 @@ class FBeamer {
     this.sendMessage(payload)
       .catch(error => console.log(error));
   }
+
+  document(id, url) {
+    let payload = {
+      recipient: {
+        id: id
+      },
+      message:{
+        attachment:{
+          type:'file',
+          payload:{
+              url:url
+          }
+        }
+      }
+    };
+
+    this.sendMessage(payload)
+      .catch(error => console.log(error));
+  }
 }
 
 module.exports = FBeamer;
