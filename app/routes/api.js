@@ -47,7 +47,7 @@ router.post('/', (req, res, next) => {
 */
 mqservice.exchange('gif_feed', function(payload) {
   console.log(' <<' + payload.resource);
-  f.text(payload.sender, 'I got it! You can download the GIF here:');
+  f.txt(payload.sender, 'I got it! You can download the GIF here:');
   f.document(payload.sender, payload.resource);
 });
 
