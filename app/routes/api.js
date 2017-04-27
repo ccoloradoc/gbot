@@ -51,6 +51,7 @@ mqservice.exchange('gif_feed', function(payload) {
     f.txt(payload.sender, 'Sorry, I could not find the proper link, I will be reviewing further :(');
   } else {
     f.txt(payload.sender, 'I got it! You can download the GIF here:');
+    f.txt(payload.sender, payload.resource);
     f.document(payload.sender, payload.resource);
   }
 });
