@@ -1,9 +1,11 @@
-var request = require('request');
-var cheerio = require('cheerio');
+'use strict';
+
+let request = require('request');
+let cheerio = require('cheerio');
 
 module.exports = {
   clean: function(url) {
-    target = decodeURIComponent(url.replace('https://l.facebook.com/l.php?u=', ''));
+    let target = decodeURIComponent(url.replace('https://l.facebook.com/l.php?u=', ''));
     return target.substring(0, target.indexOf('&'));
   },
   extract: function(url, callback) {
@@ -13,7 +15,7 @@ module.exports = {
       callback(url);
 
     //console.log(url);
-    var options =  {
+    let options =  {
         encoding: null,
         method: 'GET',
         url: url
@@ -33,29 +35,6 @@ module.exports = {
           });
 
           callback(resource);
-
-          // $('img').filter(function() {
-          //     var uri = '';
-          //
-          //     if($(this).attr('data-gif') != undefined) {
-          //       uri = $(this).attr('data-gif');
-          //     } else {
-          //       uri = $(this).attr('src');
-          //     }
-          //
-          //     if(uri.includes('http://www.phygee.com/') && !uri.includes('files/profile/')) {
-          //       uri = '';
-          //     }
-          //
-          //     if(uri != undefined && uri.startsWith('http') && uri.endsWith('.gif')) {
-          //       callback(uri);
-          //     }
-          // });
-          //
-          // $('.fullgiflogo').filter(function() {
-          //   var uri = $(this).attr('onclick').replace('fullface(\'','').replace('\')','');
-          //   callback(uri);
-          // });
 
         } else {
           callback(null);
