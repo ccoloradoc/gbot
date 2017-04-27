@@ -47,8 +47,12 @@ router.post('/', (req, res, next) => {
 */
 mqservice.exchange('gif_feed', function(payload) {
   console.log(' <<' + payload.resource);
-  f.txt(payload.sender, 'I got it! You can download the GIF here:');
-  f.document(payload.sender, payload.resource);
+  if(payload.resource == 'uknown') {
+    f.txt(payload.sender, 'Sorry, I could not find the proper link, I will be reviewing further :(');
+  } else {
+    f.txt(payload.sender, 'I got it! You can download the GIF here:');
+    f.document(payload.sender, payload.resource);
+  }
 });
 
 module.exports = router;
