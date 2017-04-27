@@ -1,11 +1,11 @@
 'use strict';
 
-let request = require('request');
-let cheerio = require('cheerio');
+var request = require('request');
+var cheerio = require('cheerio');
 
 module.exports = {
   clean: function(url) {
-    let target = decodeURIComponent(url.replace('https://l.facebook.com/l.php?u=', ''));
+    var target = decodeURIComponent(url.replace('https://l.facebook.com/l.php?u=', ''));
     return target.substring(0, target.indexOf('&'));
   },
   extract: function(url, callback) {
@@ -15,7 +15,7 @@ module.exports = {
       callback(url);
 
     //console.log(url);
-    let options =  {
+    var options =  {
         encoding: null,
         method: 'GET',
         url: url
@@ -23,8 +23,8 @@ module.exports = {
 
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          let $ = cheerio.load(body);
-          let resource = 'uknown';
+          var $ = cheerio.load(body);
+          var resource = 'uknown';
 
           $('meta').filter(function() {
               if($(this).attr('property') == 'og:url' && $(this).attr('content').endsWith('.gif')) {
