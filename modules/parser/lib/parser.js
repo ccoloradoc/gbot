@@ -21,16 +21,18 @@ module.exports = {
 
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          var $ = cheerio.load(body);
+          let $ = cheerio.load(body);
+          let resource = 'uknown';
 
           $('meta').filter(function() {
               if($(this).attr('property') == 'og:url' && $(this).attr('content').endsWith('.gif')) {
-                var resource = $(this).attr('content');
+                resource = $(this).attr('content');
                 if(resource.includes('wallgif.com'))
                     resource = resource.replace('cdn.','media.');
-                callback(resource);
               }
           });
+
+          callback(resource);
 
           // $('img').filter(function() {
           //     var uri = '';
