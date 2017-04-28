@@ -47,11 +47,12 @@ router.post('/', (req, res, next) => {
  * Monitor GIF parse resolve
 */
 mqservice.exchange('resource_feed', function(payload) {
-  console.log(' <<' + payload.resource);
+  console.log(' >> Receive: ' + payload.resource);
   if(payload.resource == 'uknown') {
     f.txt(payload.sender, 'Sorry, I could not find the proper link, I will be reviewing further :(');
   } else {
-    f.download(payload.sender, 'I got it! You can download the GIF here:', 'https:\\\\gbot.attilan.co/' + payload.id);
+    console.log(' >> Send: ' + 'https://gbot.attilan.co/' + payload.id);
+    f.download(payload.sender, 'I got it! You can download the GIF here:', 'https://gbot.attilan.co/' + payload.id);
     // f.txt(payload.sender, 'I got it! You can download the GIF here:');
     // f.txt(payload.sender, payload.resource);
     // f.document(payload.sender, payload.resource);
