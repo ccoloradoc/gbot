@@ -31,7 +31,8 @@ class FBeamer {
     });
   }
 
-  whitelist(...sites) {
+  whitelist() {
+    var sites = Array.from(arguments);
     request({
       uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
       qs: {
