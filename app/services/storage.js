@@ -17,5 +17,9 @@ mqservice.exchange('gif_feed', function(payload) {
   resource.save().then(function(res) {
       console.log('>> Resource saved correctly');
       console.log(`  ${res._id} = ${res.resource}`);
+      mqservice.fanout('resource_feed', {
+        id: res._id,
+        resource: res.resource
+      });
   });
 });
