@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/gif/:id', function(req, res, next) {
 	Resource.findById(req.params.id, function(err, resource) {
     console.log(resource);
 
