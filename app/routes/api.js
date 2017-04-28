@@ -9,7 +9,7 @@ var MQService = require('../../modules/mqservice');
 var mqservice = new MQService(config);
 
 f.subscribe();
-f.whitelist('http:////gbot.attilan.co');
+f.whitelist('http://gbot.attilan.co');
 
 /*
  *  Register facebook hook

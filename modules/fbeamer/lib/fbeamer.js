@@ -37,13 +37,12 @@ class FBeamer {
       qs: {
         access_token: this.ACCESS_TOKEN
       },
-      body: {
+      body: JSON.stringify({
         whitelisted_domains:[site]
-      },
-      json: true,
+      }),
       method: 'POST'
     }, (error, response, body) => {
-      if(!error && JSON.parse(body).success) {
+      if(!error && JSON.parse(body).result == 'success') {
         console.log('>> Site added to whitelist: ' + site);
       } else {
         console.log(error);
