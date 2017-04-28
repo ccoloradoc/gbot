@@ -15,7 +15,7 @@ class FBeamer {
     }
   }
 
-  subscribe(site) {
+  subscribe() {
     request({
       uri: 'https://graph.facebook.com/v2.6/me/subscribed_apps',
       qs: {
@@ -31,19 +31,19 @@ class FBeamer {
     });
   }
 
-  whitelist(site) {
+  whitelist(...sites) {
     request({
       uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
       qs: {
         access_token: this.ACCESS_TOKEN
       },
       body: JSON.stringify({
-        whitelisted_domains:[site]
+        whitelisted_domains: sites
       }),
       method: 'POST'
     }, (error, response, body) => {
       if(!error && JSON.parse(body).result == 'success') {
-        console.log('>> Site added to whitelist: ' + site);
+        console.log('>> Site added to whitelist: ' + sites.join(', '));
       } else {
         console.log(error);
       }
