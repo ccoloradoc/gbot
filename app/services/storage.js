@@ -19,6 +19,7 @@ mqservice.exchange('gif_feed', function(payload) {
       console.log(`  ${res._id} = ${res.resource}`);
       mqservice.fanout('resource_feed', {
         id: res._id,
+        sender: payload.sender,
         resource: res.resource
       });
   });
