@@ -3,8 +3,37 @@
   <head>
     <meta charset="utf-8">
     <title>GBot</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/main.css" media="screen" title="no title">
+    <link rel="stylesheet" href="vendor/materialize/dist/css/materialize.css" media="screen" title="no title">
   </head>
-  <body>
-      <h1>Up</h1>
+  <body class="purple lighten-1">
+    <nav class=" purple darken-1">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">GBot</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <% resources.forEach(function(resource) { %>
+          <div class="col s8 offset-s2">
+            <div class="card">
+              <div class="card-image">
+                <img src="<%= resource.resource %>">
+                <!-- <span class="card-title">Card Title</span> -->
+                <a href="/<%= resource.id %>" target="_blank" class="waves-effect waves-light btn btn-large btn-floating halfway-fab cyan lighten-1"><i class="material-icons">send</i></a>
+              </div>
+              <div class="card-content">
+                <p><%= resource.created %>.</p>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
   </body>
 </html>

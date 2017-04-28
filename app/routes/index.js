@@ -1,10 +1,44 @@
 var express = require('express');
+var dateFormat = require('dateformat');
 var router = express.Router();
+var Resource  = require('../models/resource');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', {
-  		title: 'GBot'});
+	Resource.find({ parsed: true }, function(err, resources) {
+		var response = [];
+    resources.forEach(function(resource) {
+      console.log(resource._id + ' ' + resource.resource);
+			response.push({
+				id: resource._id,
+				resource: resource.resource,
+				created: dateFormat(resource.created_at, "dddd, mmmm dS, yyyy")
+			});
+    });
+
+		res.render('index', {
+	  		title: 'GBot',
+				resources: response
+			});
+
+  });
+});
+
+router.get('/:id', function(req, res, next) {
+	Resource.findById(req.params.id, function(err, resource) {
+    console.log(resource);
+
+		res.render('resource', {
+	  		title: 'GBot',
+				resource: {
+					id: resource._id,
+					resource: resource.resource,
+					created: dateFormat(resource.created_at, "dddd, mmmm dS, yyyy")
+				}
+			});
+
+  });
 });
 
 module.exports = router;
