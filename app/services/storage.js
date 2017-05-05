@@ -1,7 +1,7 @@
 'use strict';
 var config = require('../config');
 var MQService = require('../../modules/mqservice');
-var MQService = require('../../modules/storage');
+var Storage = require('../../modules/storage');
 
 var mqservice = new MQService(config);
 
@@ -22,7 +22,7 @@ mqservice.exchange('gif_feed', function(payload) {
       console.log(`  ${res._id} = ${res.resource}`);
 
       storage.store(res.resource, res._id + '.gif');
-      
+
       mqservice.fanout('resource_feed', {
         id: res._id,
         sender: payload.sender,
