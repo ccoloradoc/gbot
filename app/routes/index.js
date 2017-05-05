@@ -41,4 +41,9 @@ router.get('/gif/:id', function(req, res, next) {
   });
 });
 
+router.get('/download/:id', function(req, res){
+  var file = __dirname + '/public/resource/' + req.params.id + '.gif';
+  res.download(file); // Set disposition and send it.
+});
+
 module.exports = router;
