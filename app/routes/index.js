@@ -42,7 +42,7 @@ router.get('/gif/:id', function(req, res, next) {
 });
 
 router.get('/download/:id', function(req, res){
-  var file = path(__dirname, '../../public/resource/' + req.params.id + '.gif');
+  var file = path.join(__dirname, '../../public/resource/' + req.params.id + '.gif');
   res.download(file); // Set disposition and send it.
 });
 
