@@ -26,7 +26,8 @@
       "env": {
         "NODE_ENV": "production",
         "MONGO_DB": "mongodb://<user>:<password>@<host>:<port>/<database>",
-        "MQ_URL": "amqp://<user>:<password>@<rabbitmq>/<service>"
+        "MQ_URL": "amqp://<user>:<password>@<rabbitmq>/<service>",
+        "STORAGE_PATH": "./resources"
       }
     }]
 }
